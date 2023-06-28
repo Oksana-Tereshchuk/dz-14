@@ -12,41 +12,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageobjects.ButtonsPage;
+import pageobjects.ElementsPage;
 
 import java.time.Duration;
-public class NavigateButtonsTest {
+public class NavigateButtonsTest extends BaseTest{
         @Test
-        public void testLogInPositive(){
-            //System.setProperty("webdriver.chrome.driver","D:\\QA\\webdriver\\chromedriver.exe");
-            ChromeOptions option = new ChromeOptions();
-            option.addArguments("--remote-allow-origins=*");
-            WebDriverManager.chromedriver().setup();
-            WebDriver driver = new ChromeDriver(option);
-            //WebDriverManager.chromedriver().setup();
-            //WebElement element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#user-name12121")));
+        public void testElementsPagePositive(){
             driver.get("https://demoqa.com/elements");
+            ButtonsPage button =new ButtonsPage(driver);
 
+        button.ButtonsElement();
 
-            driver.findElement(By.id("item-4")).click();
-            WebElement element = new WebDriverWait(driver,Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(By.id("8ArqW")));
-            driver.findElement(By.id("8ArqW")).click();
-            WebElement element1 = new WebDriverWait(driver,Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#dynamicClickMessage")));
-            //Assert.assertEquals("You selected a context menu",alert.getText());
-//        String urlActual = driver.getCurrentUrl();
-            //WebElement clickable =
-                    //driver.findElement(By.id("item-4"));
-            //new Actions(driver).click(clickable).perform();
-            //Web element = new WebDriverWait(driver,Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#hobR3")));
+        button.ClickMeElement();
 
-            //Assert.assertEquals("You selected a context menu",alert.getText());
+      String ClickMeText = button.getClickMeText();
 
-//        Assert.assertEquals(urlActual, "https://www.saucedemo.com/inventory.html",
-//                "The url is wrong");
+        System.out.println("ClickMe text:" + ClickMeText );
+        Assert.assertEquals(ClickMeText, "You have done a dynamic click");
 
-            //String titleText = driver.findElement(By.cssSelector(".app_logo")).getText();
-            //Assert.assertEquals(titleText, "Swag Labs");
-
-            driver.close();
-            driver.quit();
         }
     }
